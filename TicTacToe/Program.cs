@@ -5,6 +5,8 @@ namespace TicTacToe
 {
     class Program
     {
+        private static bool[] _isCellFilled = new bool[9];
+
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
@@ -41,41 +43,115 @@ namespace TicTacToe
                 isRightKeyPressed = true;
                 ConsoleKey pressedKey = Console.ReadKey(true)
                                                .Key;
+
                 if (pressedKey == ConsoleKey.NumPad1)
                 {
-                    MoveCursor(0, 2);
+                    if (_isCellFilled[0] == false)
+                    {
+                        MoveCursor(0, 2);
+                        _isCellFilled[0] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
+
                 else if (pressedKey == ConsoleKey.NumPad2)
                 {
-                    MoveCursor(1, 2);
+                    if (_isCellFilled[1] == false)
+                    {
+                        MoveCursor(1, 2);
+                        _isCellFilled[1] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else if (pressedKey == ConsoleKey.NumPad3)
                 {
-                    MoveCursor(2, 2);
+                    if (_isCellFilled[2] == false)
+                    {
+                        MoveCursor(2, 2);
+                        _isCellFilled[2] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else if (pressedKey == ConsoleKey.NumPad4)
                 {
-                    MoveCursor(0, 1);
+                    if (_isCellFilled[3] == false)
+                    {
+                        MoveCursor(0, 1);
+                        _isCellFilled[3] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else if (pressedKey == ConsoleKey.NumPad5)
                 {
-                    MoveCursor(1, 1);
+                    if (_isCellFilled[4] == false)
+                    {
+                        MoveCursor(1, 1);
+                        _isCellFilled[4] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else if (pressedKey == ConsoleKey.NumPad6)
                 {
-                    MoveCursor(2, 1);
+                    if (_isCellFilled[5] == false)
+                    {
+                        MoveCursor(2, 1);
+                        _isCellFilled[5] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else if (pressedKey == ConsoleKey.NumPad7)
                 {
-                    MoveCursor(0, 0);
+                    if (_isCellFilled[6] == false)
+                    {
+                        MoveCursor(0, 0);
+                        _isCellFilled[6] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else if (pressedKey == ConsoleKey.NumPad8)
                 {
-                    MoveCursor(1, 0);
+                    if (_isCellFilled[7] == false)
+                    {
+                        MoveCursor(1, 0);
+                        _isCellFilled[7] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else if (pressedKey == ConsoleKey.NumPad9)
                 {
-                    MoveCursor(2, 0);
+                    if (_isCellFilled[8] == false)
+                    {
+                        MoveCursor(2, 0);
+                        _isCellFilled[8] = true;
+                    }
+                    else
+                    {
+                        isRightKeyPressed = false;
+                    }
                 }
                 else
                 {
