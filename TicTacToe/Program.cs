@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Threading;
 
 namespace TicTacToe
 {
     class Program
     {
-        private static bool[] _isCellFilled = new bool[9];
+        private static readonly Sign[] _cellSings = new Sign[9];
 
         static void Main(string[] args)
         {
@@ -13,15 +12,31 @@ namespace TicTacToe
 
             PrintBorder();
 
-            MakeTurn('X');
-            MakeTurn('O');
-            MakeTurn('X');
-            MakeTurn('O');
-            MakeTurn('X');
-            MakeTurn('O');
-            MakeTurn('X');
-            MakeTurn('O');
-            MakeTurn('X');
+            MakeTurn(Sign.X);
+            MakeTurn(Sign.O);
+            MakeTurn(Sign.X);
+            MakeTurn(Sign.O);
+            MakeTurn(Sign.X);
+            var isXWinner = IsLine(0, 1, 2)
+                || IsLine(3, 4, 5)
+                || IsLine(6, 7, 8)
+                || IsLine(0, 3, 6)
+                || IsLine(1, 4, 7)
+                || IsLine(2, 5, 8)
+                || IsLine(0, 4, 8)
+                || IsLine(2, 4, 6);
+            if (isXWinner)
+            {
+                Console.SetCursorPosition(0, 5);
+                Console.WriteLine("Победили X!");
+                return;
+            }
+
+            MakeTurn(Sign.O);
+
+            MakeTurn(Sign.X);
+            MakeTurn(Sign.O);
+            MakeTurn(Sign.X);
 
             Console.SetCursorPosition(0, 5);
             Console.ReadLine();
@@ -34,7 +49,12 @@ namespace TicTacToe
             Console.SetCursorPosition(offsetX + left, offsetY + top);
         }
 
-        private static void MakeTurn(char symbol)
+        private static bool IsLine(int cellIndex1, int cellIndex2, int cellIndex3)
+        {
+            return _cellSings[cellIndex1] == Sign.X && _cellSings[cellIndex2] == Sign.X && _cellSings[cellIndex3] == Sign.X;
+        }
+
+        private static void MakeTurn(Sign sign)
         {
             bool isRightKeyPressed = false;
 
@@ -46,10 +66,10 @@ namespace TicTacToe
 
                 if (pressedKey == ConsoleKey.NumPad1)
                 {
-                    if (_isCellFilled[0] == false)
+                    if (_cellSings[0] == Sign.Empty)
                     {
                         MoveCursor(0, 2);
-                        _isCellFilled[0] = true;
+                        _cellSings[0] = sign;
                     }
                     else
                     {
@@ -59,10 +79,10 @@ namespace TicTacToe
 
                 else if (pressedKey == ConsoleKey.NumPad2)
                 {
-                    if (_isCellFilled[1] == false)
+                    if (_cellSings[1] == Sign.Empty)
                     {
                         MoveCursor(1, 2);
-                        _isCellFilled[1] = true;
+                        _cellSings[1] = sign;
                     }
                     else
                     {
@@ -71,10 +91,10 @@ namespace TicTacToe
                 }
                 else if (pressedKey == ConsoleKey.NumPad3)
                 {
-                    if (_isCellFilled[2] == false)
+                    if (_cellSings[2] == Sign.Empty)
                     {
                         MoveCursor(2, 2);
-                        _isCellFilled[2] = true;
+                        _cellSings[2] = sign;
                     }
                     else
                     {
@@ -83,10 +103,10 @@ namespace TicTacToe
                 }
                 else if (pressedKey == ConsoleKey.NumPad4)
                 {
-                    if (_isCellFilled[3] == false)
+                    if (_cellSings[3] == Sign.Empty)
                     {
                         MoveCursor(0, 1);
-                        _isCellFilled[3] = true;
+                        _cellSings[3] = sign;
                     }
                     else
                     {
@@ -95,10 +115,10 @@ namespace TicTacToe
                 }
                 else if (pressedKey == ConsoleKey.NumPad5)
                 {
-                    if (_isCellFilled[4] == false)
+                    if (_cellSings[4] == Sign.Empty)
                     {
                         MoveCursor(1, 1);
-                        _isCellFilled[4] = true;
+                        _cellSings[4] = sign;
                     }
                     else
                     {
@@ -107,10 +127,10 @@ namespace TicTacToe
                 }
                 else if (pressedKey == ConsoleKey.NumPad6)
                 {
-                    if (_isCellFilled[5] == false)
+                    if (_cellSings[5] == Sign.Empty)
                     {
                         MoveCursor(2, 1);
-                        _isCellFilled[5] = true;
+                        _cellSings[5] = sign;
                     }
                     else
                     {
@@ -119,10 +139,10 @@ namespace TicTacToe
                 }
                 else if (pressedKey == ConsoleKey.NumPad7)
                 {
-                    if (_isCellFilled[6] == false)
+                    if (_cellSings[6] == Sign.Empty)
                     {
                         MoveCursor(0, 0);
-                        _isCellFilled[6] = true;
+                        _cellSings[6] = sign;
                     }
                     else
                     {
@@ -131,10 +151,10 @@ namespace TicTacToe
                 }
                 else if (pressedKey == ConsoleKey.NumPad8)
                 {
-                    if (_isCellFilled[7] == false)
+                    if (_cellSings[7] == Sign.Empty)
                     {
                         MoveCursor(1, 0);
-                        _isCellFilled[7] = true;
+                        _cellSings[7] = sign;
                     }
                     else
                     {
@@ -143,10 +163,10 @@ namespace TicTacToe
                 }
                 else if (pressedKey == ConsoleKey.NumPad9)
                 {
-                    if (_isCellFilled[8] == false)
+                    if (_cellSings[8] == Sign.Empty)
                     {
                         MoveCursor(2, 0);
-                        _isCellFilled[8] = true;
+                        _cellSings[8] = sign;
                     }
                     else
                     {
@@ -159,7 +179,7 @@ namespace TicTacToe
                 }
             }
 
-            Console.Write(symbol);
+            Console.Write(sign);
         }
 
         private static void PrintBorder()
