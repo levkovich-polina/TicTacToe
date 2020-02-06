@@ -17,14 +17,14 @@ namespace TicTacToe
             MakeTurn(Sign.X);
             MakeTurn(Sign.O);
             MakeTurn(Sign.X);
-            var isXWinner = IsLine(0, 1, 2)
-                || IsLine(3, 4, 5)
-                || IsLine(6, 7, 8)
-                || IsLine(0, 3, 6)
-                || IsLine(1, 4, 7)
-                || IsLine(2, 5, 8)
-                || IsLine(0, 4, 8)
-                || IsLine(2, 4, 6);
+            var isXWinner = IsLine(0, 1, 2, Sign.X)
+                || IsLine(3, 4, 5, Sign.X)
+                || IsLine(6, 7, 8, Sign.X)
+                || IsLine(0, 3, 6, Sign.X)
+                || IsLine(1, 4, 7, Sign.X)
+                || IsLine(2, 5, 8, Sign.X)
+                || IsLine(0, 4, 8, Sign.X)
+                || IsLine(2, 4, 6, Sign.X);
             if (isXWinner)
             {
                 Console.SetCursorPosition(0, 5);
@@ -33,10 +33,68 @@ namespace TicTacToe
             }
 
             MakeTurn(Sign.O);
+            var isOWinner = IsLine(0, 1, 2, Sign.O)
+                || IsLine(3, 4, 5, Sign.O)
+                || IsLine(6, 7, 8, Sign.O)
+                || IsLine(0, 3, 6, Sign.O)
+                || IsLine(1, 4, 7, Sign.O)
+                || IsLine(2, 5, 8, Sign.O)
+                || IsLine(0, 4, 8, Sign.O)
+                || IsLine(2, 4, 6, Sign.O);
+            if (isOWinner)
+            {
+                Console.SetCursorPosition(0, 5);
+                Console.WriteLine("Победили O!");
+                return;
+            }
 
             MakeTurn(Sign.X);
+            var isXWinner1 = IsLine(0, 1, 2, Sign.X)
+                || IsLine(3, 4, 5, Sign.X)
+                || IsLine(6, 7, 8, Sign.X)
+                || IsLine(0, 3, 6, Sign.X)
+                || IsLine(1, 4, 7, Sign.X)
+                || IsLine(2, 5, 8, Sign.X)
+                || IsLine(0, 4, 8, Sign.X)
+                || IsLine(2, 4, 6, Sign.X);
+            if (isXWinner1)
+            {
+                Console.SetCursorPosition(0, 5);
+                Console.WriteLine("Победили X!");
+                return;
+            }
+
             MakeTurn(Sign.O);
+            var isOWinner1 = IsLine(0, 1, 2, Sign.O)
+                || IsLine(3, 4, 5, Sign.O)
+                || IsLine(6, 7, 8, Sign.O)
+                || IsLine(0, 3, 6, Sign.O)
+                || IsLine(1, 4, 7, Sign.O)
+                || IsLine(2, 5, 8, Sign.O)
+                || IsLine(0, 4, 8, Sign.O)
+                || IsLine(2, 4, 6, Sign.O);
+            if (isOWinner1)
+            {
+                Console.SetCursorPosition(0, 5);
+                Console.WriteLine("Победили O!");
+                return;
+            }
+
             MakeTurn(Sign.X);
+            var isXWinner2 = IsLine(0, 1, 2, Sign.X)
+                || IsLine(3, 4, 5, Sign.X)
+                || IsLine(6, 7, 8, Sign.X)
+                || IsLine(0, 3, 6, Sign.X)
+                || IsLine(1, 4, 7, Sign.X)
+                || IsLine(2, 5, 8, Sign.X)
+                || IsLine(0, 4, 8, Sign.X)
+                || IsLine(2, 4, 6, Sign.X);
+            if (isXWinner2)
+            {
+                Console.SetCursorPosition(0, 5);
+                Console.WriteLine("Победили X!");
+                return;
+            }
 
             Console.SetCursorPosition(0, 5);
             Console.ReadLine();
@@ -49,9 +107,9 @@ namespace TicTacToe
             Console.SetCursorPosition(offsetX + left, offsetY + top);
         }
 
-        private static bool IsLine(int cellIndex1, int cellIndex2, int cellIndex3)
+        private static bool IsLine(int cellIndex1, int cellIndex2, int cellIndex3, Sign sign)
         {
-            return _cellSings[cellIndex1] == Sign.X && _cellSings[cellIndex2] == Sign.X && _cellSings[cellIndex3] == Sign.X;
+            return _cellSings[cellIndex1] == sign && _cellSings[cellIndex2] == sign && _cellSings[cellIndex3] == sign;
         }
 
         private static void MakeTurn(Sign sign)
