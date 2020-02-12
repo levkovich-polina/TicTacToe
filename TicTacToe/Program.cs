@@ -17,14 +17,7 @@ namespace TicTacToe
             MakeTurn(Sign.X);
             MakeTurn(Sign.O);
             MakeTurn(Sign.X);
-            var isXWinner = IsLine(0, 1, 2, Sign.X)
-                || IsLine(3, 4, 5, Sign.X)
-                || IsLine(6, 7, 8, Sign.X)
-                || IsLine(0, 3, 6, Sign.X)
-                || IsLine(1, 4, 7, Sign.X)
-                || IsLine(2, 5, 8, Sign.X)
-                || IsLine(0, 4, 8, Sign.X)
-                || IsLine(2, 4, 6, Sign.X);
+            bool isXWinner = IsFilledLineExist(Sign.X);
             if (isXWinner)
             {
                 Console.SetCursorPosition(0, 5);
@@ -33,14 +26,7 @@ namespace TicTacToe
             }
 
             MakeTurn(Sign.O);
-            var isOWinner = IsLine(0, 1, 2, Sign.O)
-                || IsLine(3, 4, 5, Sign.O)
-                || IsLine(6, 7, 8, Sign.O)
-                || IsLine(0, 3, 6, Sign.O)
-                || IsLine(1, 4, 7, Sign.O)
-                || IsLine(2, 5, 8, Sign.O)
-                || IsLine(0, 4, 8, Sign.O)
-                || IsLine(2, 4, 6, Sign.O);
+            bool isOWinner = IsFilledLineExist(Sign.O);
             if (isOWinner)
             {
                 Console.SetCursorPosition(0, 5);
@@ -49,14 +35,7 @@ namespace TicTacToe
             }
 
             MakeTurn(Sign.X);
-            var isXWinner1 = IsLine(0, 1, 2, Sign.X)
-                || IsLine(3, 4, 5, Sign.X)
-                || IsLine(6, 7, 8, Sign.X)
-                || IsLine(0, 3, 6, Sign.X)
-                || IsLine(1, 4, 7, Sign.X)
-                || IsLine(2, 5, 8, Sign.X)
-                || IsLine(0, 4, 8, Sign.X)
-                || IsLine(2, 4, 6, Sign.X);
+            bool isXWinner1 = IsFilledLineExist(Sign.X);
             if (isXWinner1)
             {
                 Console.SetCursorPosition(0, 5);
@@ -65,14 +44,7 @@ namespace TicTacToe
             }
 
             MakeTurn(Sign.O);
-            var isOWinner1 = IsLine(0, 1, 2, Sign.O)
-                || IsLine(3, 4, 5, Sign.O)
-                || IsLine(6, 7, 8, Sign.O)
-                || IsLine(0, 3, 6, Sign.O)
-                || IsLine(1, 4, 7, Sign.O)
-                || IsLine(2, 5, 8, Sign.O)
-                || IsLine(0, 4, 8, Sign.O)
-                || IsLine(2, 4, 6, Sign.O);
+            bool isOWinner1 = IsFilledLineExist(Sign.O);
             if (isOWinner1)
             {
                 Console.SetCursorPosition(0, 5);
@@ -81,14 +53,7 @@ namespace TicTacToe
             }
 
             MakeTurn(Sign.X);
-            var isXWinner2 = IsLine(0, 1, 2, Sign.X)
-                || IsLine(3, 4, 5, Sign.X)
-                || IsLine(6, 7, 8, Sign.X)
-                || IsLine(0, 3, 6, Sign.X)
-                || IsLine(1, 4, 7, Sign.X)
-                || IsLine(2, 5, 8, Sign.X)
-                || IsLine(0, 4, 8, Sign.X)
-                || IsLine(2, 4, 6, Sign.X);
+            bool isXWinner2 = IsFilledLineExist(Sign.X);
             if (isXWinner2)
             {
                 Console.SetCursorPosition(0, 5);
@@ -108,7 +73,7 @@ namespace TicTacToe
             Console.SetCursorPosition(offsetX + left, offsetY + top);
         }
 
-        private static bool IsLine(int cellIndex1, int cellIndex2, int cellIndex3, Sign sign)
+        private static bool IsLineFilled(int cellIndex1, int cellIndex2, int cellIndex3, Sign sign)
         {
             return _cellSings[cellIndex1] == sign && _cellSings[cellIndex2] == sign && _cellSings[cellIndex3] == sign;
         }
@@ -123,114 +88,15 @@ namespace TicTacToe
                 ConsoleKey pressedKey = Console.ReadKey(true)
                                                .Key;
 
-                if (pressedKey == ConsoleKey.NumPad1)
-                {
-                    if (_cellSings[0] == Sign.Empty)
-                    {
-                        MoveCursor(0, 2);
-                        _cellSings[0] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
+                int keyNumber = (int) pressedKey - 96;
+                int cellIndex = keyNumber - 1;
+                int leftOffset = cellIndex % 3;
+                int topOffset = 2 - (cellIndex / 3);
 
-                else if (pressedKey == ConsoleKey.NumPad2)
+                if (_cellSings[cellIndex] == Sign.Empty)
                 {
-                    if (_cellSings[1] == Sign.Empty)
-                    {
-                        MoveCursor(1, 2);
-                        _cellSings[1] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
-                else if (pressedKey == ConsoleKey.NumPad3)
-                {
-                    if (_cellSings[2] == Sign.Empty)
-                    {
-                        MoveCursor(2, 2);
-                        _cellSings[2] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
-                else if (pressedKey == ConsoleKey.NumPad4)
-                {
-                    if (_cellSings[3] == Sign.Empty)
-                    {
-                        MoveCursor(0, 1);
-                        _cellSings[3] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
-                else if (pressedKey == ConsoleKey.NumPad5)
-                {
-                    if (_cellSings[4] == Sign.Empty)
-                    {
-                        MoveCursor(1, 1);
-                        _cellSings[4] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
-                else if (pressedKey == ConsoleKey.NumPad6)
-                {
-                    if (_cellSings[5] == Sign.Empty)
-                    {
-                        MoveCursor(2, 1);
-                        _cellSings[5] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
-                else if (pressedKey == ConsoleKey.NumPad7)
-                {
-                    if (_cellSings[6] == Sign.Empty)
-                    {
-                        MoveCursor(0, 0);
-                        _cellSings[6] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
-                else if (pressedKey == ConsoleKey.NumPad8)
-                {
-                    if (_cellSings[7] == Sign.Empty)
-                    {
-                        MoveCursor(1, 0);
-                        _cellSings[7] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
-                }
-                else if (pressedKey == ConsoleKey.NumPad9)
-                {
-                    if (_cellSings[8] == Sign.Empty)
-                    {
-                        MoveCursor(2, 0);
-                        _cellSings[8] = sign;
-                    }
-                    else
-                    {
-                        isRightKeyPressed = false;
-                    }
+                    MoveCursor(leftOffset, topOffset);
+                    _cellSings[cellIndex] = sign;
                 }
                 else
                 {
@@ -239,6 +105,19 @@ namespace TicTacToe
             }
 
             Console.Write(sign);
+        }
+
+        private static bool IsFilledLineExist(Sign sign)
+        {
+            bool isFilledLineExist = IsLineFilled(0, 1, 2, sign)
+                || IsLineFilled(3, 4, 5, sign)
+                || IsLineFilled(6, 7, 8, sign)
+                || IsLineFilled(0, 3, 6, sign)
+                || IsLineFilled(1, 4, 7, sign)
+                || IsLineFilled(2, 5, 8, sign)
+                || IsLineFilled(0, 4, 8, sign)
+                || IsLineFilled(2, 4, 6, sign);
+            return isFilledLineExist;
         }
 
         private static void PrintBorder()
