@@ -97,6 +97,7 @@ namespace TicTacToe
             }
 
             Console.SetCursorPosition(0, 5);
+            Console.WriteLine("Ничья!");
             Console.ReadLine();
         }
 
