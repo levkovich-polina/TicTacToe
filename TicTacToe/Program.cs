@@ -12,58 +12,46 @@ namespace TicTacToe
 
             PrintBorder();
 
-            MakeTurn(Sign.X);
-            MakeTurn(Sign.O);
-            MakeTurn(Sign.X);
-            MakeTurn(Sign.O);
-            MakeTurn(Sign.X);
-            bool isXWinner = IsFilledLineExist(Sign.X);
-            if (isXWinner)
+            Sign winnerSign = Sign.Empty;
+            for (int turnIndex = 0; turnIndex < 9; turnIndex++)
             {
-                Console.SetCursorPosition(0, 5);
-                Console.WriteLine("Победили X!");
-                return;
-            }
+                Sign sign = GetSign(turnIndex);
+                MakeTurn(sign);
+                if (turnIndex >= 4)
+                {
+                    bool isWinner = IsFilledLineExist(sign);
 
-            MakeTurn(Sign.O);
-            bool isOWinner = IsFilledLineExist(Sign.O);
-            if (isOWinner)
-            {
-                Console.SetCursorPosition(0, 5);
-                Console.WriteLine("Победили O!");
-                return;
-            }
-
-            MakeTurn(Sign.X);
-            bool isXWinner1 = IsFilledLineExist(Sign.X);
-            if (isXWinner1)
-            {
-                Console.SetCursorPosition(0, 5);
-                Console.WriteLine("Победили X!");
-                return;
-            }
-
-            MakeTurn(Sign.O);
-            bool isOWinner1 = IsFilledLineExist(Sign.O);
-            if (isOWinner1)
-            {
-                Console.SetCursorPosition(0, 5);
-                Console.WriteLine("Победили O!");
-                return;
-            }
-
-            MakeTurn(Sign.X);
-            bool isXWinner2 = IsFilledLineExist(Sign.X);
-            if (isXWinner2)
-            {
-                Console.SetCursorPosition(0, 5);
-                Console.WriteLine("Победили X!");
-                return;
+                    if (isWinner)
+                    {
+                        winnerSign = sign;
+                        break;
+                    }
+                }
             }
 
             Console.SetCursorPosition(0, 5);
-            Console.WriteLine("Ничья!");
+            if (winnerSign == Sign.Empty)
+            {
+                Console.WriteLine($"Ничья!");
+            }
+            else
+            {
+                Console.WriteLine($"Победил {winnerSign}!");
+            }
+
             Console.ReadLine();
+        }
+
+        private static Sign GetSign(int turnIndex)
+        {
+            if (turnIndex % 2 == 0)
+            {
+                return Sign.X;
+            }
+            else
+            {
+                return Sign.O;
+            }
         }
 
         private static void MoveCursor(int left, int top)
